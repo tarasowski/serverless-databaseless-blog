@@ -52,3 +52,9 @@ Resources:
                         Path: /{url}
                         Method: GET
     
+Outputs:
+
+    YourBlogApi:
+      Description: "API Gateway endpoint URL for Prod stage for your databaseless blog"
+      Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+

@@ -1,5 +1,8 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: URL shortener service
+Description: 'The new kid on the block: databaseless, serverless, storageless blog
+  It sounds like Doener Kebab without everything.
+
+  '
 Globals:
   Api:
     Cors:
@@ -14,8 +17,14 @@ Globals:
     Handler: get-all-posts.handler
     Runtime: nodejs8.10
     Timeout: 10
+Outputs:
+  YourBlogApi:
+    Description: API Gateway endpoint URL for Prod stage for your databaseless blog
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/
 Parameters:
   SpreadsheetId:
+    ConstraintDescription: You should change the SpreadsheetId here
     Default: 1clAorA4e4F-4aUAqfupFDvicSIoqRNGznASQ9GWy6_c
     Description: Add your spreadsheet id that you are using as a database
     MaxLength: 100
@@ -24,7 +33,7 @@ Parameters:
 Resources:
   GetAllPostsFromSheet:
     Properties:
-      CodeUri: s3://databaseless-serverless-blog-us-east-test/a850cea10485d1ebb3d592b195818787
+      CodeUri: s3://databaseless-serverless-blog-us-east-test/0911497768cf76a4e6b5cff0f9055612
       Description: This lambda function returns all results back to the caller
       Events:
         CallGoogleSheetFile:
@@ -34,10 +43,10 @@ Resources:
           Type: Api
       Handler: get-all-posts.handler
     Type: AWS::Serverless::Function
-  GetPostByIdFromSheet:
+  GetPostByUrlFromSheet:
     Properties:
-      CodeUri: s3://databaseless-serverless-blog-us-east-test/a850cea10485d1ebb3d592b195818787
-      Description: This lambda function returns a specific post by id
+      CodeUri: s3://databaseless-serverless-blog-us-east-test/0911497768cf76a4e6b5cff0f9055612
+      Description: This lambda function returns a specific post by url to the caller
       Events:
         CallGoogleSheetFile:
           Properties:

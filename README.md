@@ -1,7 +1,7 @@
 # Serverless & Databaseless Blog
 Setup your blog in minutes without servers, database and storage.
 
-Example API Endpoint: https://wwrzkwagsf.execute-api.us-east-1.amazonaws.com/Prod/
+Example API Endpoint: https://xwlspy0iw2.execute-api.us-east-1.amazonaws.com/Prod/
 Example Google Sheetfile: https://docs.google.com/spreadsheets/d/1clAorA4e4F-4aUAqfupFDvicSIoqRNGznASQ9GWy6_c/edit#gid=0
 
 1. git clone
@@ -18,4 +18,5 @@ Example Google Sheetfile: https://docs.google.com/spreadsheets/d/1clAorA4e4F-4aU
 
 **Note** If you want to filter by urls, simply use the following schema `http://www.your-api-endpoint.com/url-from-the-file`. In the case above you would access a 3rd post by simply calling `http://www.your-api-endpoint.com/want-to-read-more-3`
 
+![Flow](./images/database-serverless-blog.png)
 
