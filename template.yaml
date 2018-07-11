@@ -40,11 +40,11 @@ Resources:
                     Properties:
                         Path: /
                         Method: GET
-    GetPostByIdFromSheet:
+    GetPostByUrlFromSheet:
         Type: 'AWS::Serverless::Function'
         Properties:
             Handler: get-post-by-id.handler
-            Description: This lambda function returns a specific post by id to the caller
+            Description: This lambda function returns a specific post by url to the caller
             Events:
                 CallGoogleSheetFile:
                     Type: Api
