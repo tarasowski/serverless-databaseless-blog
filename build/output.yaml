@@ -1,0 +1,49 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: URL shortener service
+Globals:
+  Api:
+    Cors:
+      AllowHeaders: '''*'''
+      AllowMethods: '''*'''
+      AllowOrigin: '''*'''
+  Function:
+    Environment:
+      Variables:
+        SPREADSHEET_ID:
+          Ref: SpreadsheetId
+    Handler: get-all-posts.handler
+    Runtime: nodejs8.10
+    Timeout: 10
+Parameters:
+  SpreadsheetId:
+    Default: 1clAorA4e4F-4aUAqfupFDvicSIoqRNGznASQ9GWy6_c
+    Description: Add your spreadsheet id that you are using as a database
+    MaxLength: 100
+    MinLength: 10
+    Type: String
+Resources:
+  GetAllPostsFromSheet:
+    Properties:
+      CodeUri: s3://databaseless-serverless-blog-us-east-test/a850cea10485d1ebb3d592b195818787
+      Description: This lambda function returns all results back to the caller
+      Events:
+        CallGoogleSheetFile:
+          Properties:
+            Method: GET
+            Path: /
+          Type: Api
+      Handler: get-all-posts.handler
+    Type: AWS::Serverless::Function
+  GetPostByIdFromSheet:
+    Properties:
+      CodeUri: s3://databaseless-serverless-blog-us-east-test/a850cea10485d1ebb3d592b195818787
+      Description: This lambda function returns a specific post by id
+      Events:
+        CallGoogleSheetFile:
+          Properties:
+            Method: GET
+            Path: /{url}
+          Type: Api
+      Handler: get-post-by-id.handler
+    Type: AWS::Serverless::Function
+Transform: AWS::Serverless-2016-10-31

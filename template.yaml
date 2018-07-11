@@ -1,0 +1,54 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: > 
+    The new kid on the block: databaseless, serverless, storageless blog
+    It sounds like Doener Kebab without everything.
+
+Parameters:
+    SpreadsheetId:
+        Type: String
+        Description: Add your spreadsheet id that you are using as a database
+        MinLength: 10
+        MaxLength: 100
+        Default: 1clAorA4e4F-4aUAqfupFDvicSIoqRNGznASQ9GWy6_c
+        ConstraintDescription: You should change the SpreadsheetId here
+
+Globals:
+    Function:
+        Timeout: 10
+        Runtime: nodejs8.10
+        Handler: get-all-posts.handler
+        Environment:
+            Variables:
+                SPREADSHEET_ID: !Ref SpreadsheetId
+    Api:
+        Cors:
+            AllowMethods: "'*'"
+            AllowHeaders: "'*'"
+            AllowOrigin: "'*'"
+                
+Resources:
+    
+    GetAllPostsFromSheet:
+        Type: 'AWS::Serverless::Function'
+        Properties:
+            Handler: get-all-posts.handler
+            Description: This lambda function returns all results back to the caller
+            Events:
+                CallGoogleSheetFile:
+                    Type: Api
+                    Properties:
+                        Path: /
+                        Method: GET
+    GetPostByIdFromSheet:
+        Type: 'AWS::Serverless::Function'
+        Properties:
+            Handler: get-post-by-id.handler
+            Description: This lambda function returns a specific post by id to the caller
+            Events:
+                CallGoogleSheetFile:
+                    Type: Api
+                    Properties:
+                        Path: /{url}
+                        Method: GET
+    
