@@ -1,6 +1,9 @@
 # Serverless & Databaseless Blog
 Setup your blog in minutes without servers, database and storage.
 
+Example API Endpoint: https://wwrzkwagsf.execute-api.us-east-1.amazonaws.com/Prod/
+Example Google Sheetfile: https://docs.google.com/spreadsheets/d/1clAorA4e4F-4aUAqfupFDvicSIoqRNGznASQ9GWy6_c/edit#gid=0
+
 1. git clone
 2. Run `npm install`
 3. Change s3 bucket names in `package.json`
